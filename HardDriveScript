@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # There are no 'data types' in bash. Any variables made of only numbers can do arithmetic.
