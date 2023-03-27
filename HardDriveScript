@@ -1,10 +1,11 @@
 #!/bin/bash
+# This script uses the metric system (1000 bytes to a KB etc) to measure size
 
-# There are no 'data types' in bash. Any variables made of only numbers can do arithmetic.
-# Size uses the metric system (1000 bytes to a KB etc)
-
-Numbers=('0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12')
+# Scheme Chunk
+NumbersScheme=('0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12')        # An array meant to help increment with for loops
 Scheme=('Name' 'Rack position' 'Brand' 'Serial number' 'Size' 'Model' 'Revolutions per minute' 'Data interface' 'Power draw' 'Purpose' 'Format' 'Scheme' 'Debug port')
+
+# Hard drive data chunk
 HardDrive0=('Hard Drive 0' '' 'Western Digital' '' '' '' '' '' '' '' '' '' '')
 HardDrive1=('Hard Drive 1' '' 'Toshiba' '' '' '' '' '' '' '' '' '' '')
 HardDrive2=('Hard Drive 2' '' 'Western Digital' '' '' '' '' '' '' '' '' '' '')
@@ -13,16 +14,12 @@ HardDrive4=('Hard Drive 4' '' 'Western Digital' '' '' '' '' '' '' '' '' '' '')
 HardDrive5=('Hard Drive 5' '' 'Western Digital' '' '' '' '' '' '' '' '' '' '')
 HardDrive6=('Hard Drive 6' '' 'Western Digital' '' '' '' '' '' '' '' '' '' '')
 
-HardDrives=(${Scheme[@]} ${HardDrive0[@]} ${HardDrive1[@]} ${HardDrive2[@]} ${HardDrive3[@]} ${HardDrive4[@]} ${HardDrive5[@]} ${HardDrive6[@]})
+# Master list chunk
+NumberHardDrives=('0' '1' '2' '3' '4' '5' '6' '7' '8' '9' '10' '11' '12')       # The number of hard draves in the master array for 'for' loops
+HardDrivesMaster=(${Scheme[@]} ${HardDrive0[@]} ${HardDrive1[@]} ${HardDrive2[@]} ${HardDrive3[@]} ${HardDrive4[@]} ${HardDrive5[@]} ${HardDrive6[@]})  # Master lists of all hard drives
 
-# When calling any variable the {} are used to isolate the varable to ensure correct syntax.
-# The [@] is used to index all the elements of an array.
-# I belive the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation 
-marks encapsulate$
-# Semicolons (;) can be used to make lines of code more dense they are treated as 'new lines' and therefore new commands
-# Done closes all loops in bash
-
-for element in "${Numbers[@]}"
+# Excecutable chunk
+for element in "${NumbersScheme[@]}"    #  Loops for every element in Scheme
 do
-        echo "${Scheme[element]}: ${HardDrive0[element]}"
+        echo "${Scheme[element]}: ${HardDrive0[element]}"       # Prints the scheme and the coded hard drive's attributes that match
 done
