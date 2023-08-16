@@ -1,16 +1,10 @@
 Source: https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion
 
-The [@] is used to index all the elements of a variable.
-I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate
-Semicolons (;) can be used to make lines of code more dense they are treated as 'new lines' and therefore new commands
-Done closes all loops in bash
-
-
 Data Types
 	- There are no 'data types' in bash like there are in python.
 	Numbers
-		Only raw numbers can do maths
-		No specific formatting??
+		- Only raw numbers can do maths
+		- No specific formatting??
 			ex: $((1+2)) works but $(("1"+"2")) doesn't
 	
 	Strings
@@ -21,13 +15,12 @@ Data Types
 	
 	Arrays
 		- Understand me!!!
-		The [@] is used to index all the elements of an array.
-		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate
+		The [@] is used to index all the elements of an array.	IS THIS TRUE?
+		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate	IS THIS TRUE?
 
 
 Maths
 	Math can only be done with raw integers not string integers
-	
 	$((operations))
 		- Understand why the syntax works like that
 	+ addition
@@ -39,7 +32,7 @@ Maths
 	% divides then returns the remainder
 		ex: $((5%3)); >>> 2
 	Functions
-		Include some essential functions use link as a jumping point(https://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks)
+		Include some essential maths functions use link as a jumping point(https://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks)
 
 
 Variables
@@ -52,29 +45,35 @@ Variables
 		ex: $PWD or $things_i_love
 	- When calling a variable the {} are used to isolate the variable to ensure correct syntax.
 		EX: echo "${Hello}World" vs echo -n "$Hello"; echo "World" because echo "$HelloWorld" returns something different
+	The [@] is used to index all the elements of a variable. IS THIS TRUE?
 
 
 Functions
-	"done" closes all loops in bash
+	"done" closes all loops in bash IS THIS TRUE?
 	case
+		- How the fuck does it work??
 		) end of a pattern that case is trying to match
 		;; acts as a control operator and ends that specific chunk of code that is executed only when the pattern is met
 	
 	if
-		Comprised of CONDITION and STUFF commands
-		When CONDITION is executed it leaves behind a exit status
-		If this exit status is 0 then the CONDITION evaluated to true and if not it's false
-		STUFF is only executed if CONDITION exits with a status of 0
-		EX. if CONDITION
-		    do STUFF
-		    fi
+		Comprised of CONDITION and STUFF commands	IS THIS TRUE?
+		When CONDITION is executed it leaves behind a exit status	IS THIS TRUE?
+		If this exit status is 0 then the CONDITION evaluated to true and if not it's false	IS THIS TRUE?
+		STUFF is only executed if CONDITION exits with a status of 0	IS THIS TRUE?
+			ex: if CONDITION	IS THIS TRUE?
+			    do STUFF		IS THIS TRUE?
+			    fi			IS THIS TRUE?
 	
 	when
+		- understand me!
 	for
+		- understand me!
 	exit
+		- understand me!
 
 
-Passing arguments to a function
+Passing arguments to a function		IS THIS TRUE?
+	- Update with the while and case rombo combo
 	When a function is called special sheet variables are used to assign what arguments have been passed
 	These variables are $0 through $9
 	$0 is always fixed to the function (or executable) name
@@ -97,6 +96,7 @@ Syntax
 		|
 		|&
 		<newline>
+	
 	Metacharacters 
 		- A character that, when unquoted, separates words.
 		|
@@ -110,7 +110,7 @@ Syntax
 		space
 		tab
 	
-	Where do I put this?? ▼ 
+	Where do I put these?? ▼ 
 		Parenthesis with a leading dollar sign $()
 			This is a 'command substitution'
 			Executes the nested command in a sub shell
@@ -133,19 +133,19 @@ Syntax
 			Best only for use when a script is to be used by multiple different shells
 
 
-Portability
+Portability	IS THIS TRUE?
 	Use [] and = for conditional expressions (replaces [[]] and == respectively)
 	What are the main differences between shells?
 
 
-Exit status of a command
+Exit status of a command	IS THIS TRUE?
 	Every time a command is run an exit status is outputted
 	This status is stored in  $? For the last command executed
 	If the command is successful then exit status of 0 is assigned if there is a failure any number between 1 and 255 can be assigned
 	Extremely useful for error handling and debugging
 
 
-Passing an argument to a script (flags)
+Passing an argument to a script (flags)	IS THIS TRUE?
 	example: 
 		script:
 			echo -e "Function name: $0\nArg 1: $1\nArg 2: $2\nTotal args: $#"
