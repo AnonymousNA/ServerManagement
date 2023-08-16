@@ -1,14 +1,11 @@
 #!/bin/bash
 # Written by Willow Leahy
-# This is my first script
-# It has been revised to allow better functionality
-# This script is a ssh command with default credential preloaded to make logging in faster. 
-# Original script: 'ssh anonymousna@192.268.0.239'
+# This script is a ssh command with default credential preloaded to make remote management faster.
 
 
 # Default Credentials and variables
 # Will be used if no flags are given
-TARGETHOSTNAME=""
+TARGETHOSTNAME=
 IP=""
 USER=""
 HOSTNAMEFLAG=0
