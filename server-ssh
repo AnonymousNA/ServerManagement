@@ -36,7 +36,7 @@ while getopts ":hrv" opt; do
                         ;;
                 *)
                         echo "Unkown option: $OPTARG"
-                        echo "        To display command help use -h flag"
+                        echo "        To display help page use -h flag"
                         ;;
         esac
 done
