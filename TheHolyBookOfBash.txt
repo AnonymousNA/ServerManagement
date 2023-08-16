@@ -1,0 +1,158 @@
+Source: https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion
+
+The [@] is used to index all the elements of a variable.
+I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate
+Semicolons (;) can be used to make lines of code more dense they are treated as 'new lines' and therefore new commands
+Done closes all loops in bash
+
+
+Data Types
+	- There are no 'data types' in bash like there are in python.
+	Numbers
+		Only raw numbers can do maths
+		No specific formatting??
+			ex: $((1+2)) works but $(("1"+"2")) doesn't
+	
+	Strings
+		- Strings are surrounded in double (") or single (') quotes
+		- If a data item is to be treated like a string contain it with quotes!
+		- When dealing with numbers use quotes to ensure that any numbers are treated as strings
+		- more deets abt strings
+	
+	Arrays
+		- Understand me!!!
+		The [@] is used to index all the elements of an array.
+		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate
+
+
+Maths
+	Math can only be done with raw integers not string integers
+	
+	$((operations))
+		- Understand why the syntax works like that
+	+ addition
+	- subtraction
+	/ division
+		Returns the answer rounded down to the whole number
+		ex: $((5/3)); >>> 1
+	* multiplication
+	% divides then returns the remainder
+		ex: $((5%3)); >>> 2
+	Functions
+		Include some essential functions use link as a jumping point(https://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks)
+
+
+Variables
+	- Defined by a single '='
+		ex: things_i_love="cats"
+	- ONLY global and shell variables should be all uppercase
+		ex: PWD vs things_i_love
+	- Local variables should be lower case
+	- To call a variable use a single '$'
+		ex: $PWD or $things_i_love
+	- When calling a variable the {} are used to isolate the variable to ensure correct syntax.
+		EX: echo "${Hello}World" vs echo -n "$Hello"; echo "World" because echo "$HelloWorld" returns something different
+
+
+Functions
+	"done" closes all loops in bash
+	case
+		) end of a pattern that case is trying to match
+		;; acts as a control operator and ends that specific chunk of code that is executed only when the pattern is met
+	
+	if
+		Comprised of CONDITION and STUFF commands
+		When CONDITION is executed it leaves behind a exit status
+		If this exit status is 0 then the CONDITION evaluated to true and if not it's false
+		STUFF is only executed if CONDITION exits with a status of 0
+		EX. if CONDITION
+		    do STUFF
+		    fi
+	
+	when
+	for
+	exit
+
+
+Passing arguments to a function
+	When a function is called special sheet variables are used to assign what arguments have been passed
+	These variables are $0 through $9
+	$0 is always fixed to the function (or executable) name
+	$1 - $9 are all the arguments
+	$# is the number of arguments passed
+		EX. In "ScriptKitty -h" $# will evaluate to 1
+
+
+Syntax
+	- Use "man bash" as a jumping off point
+	Control operators
+		- A token that performs a control function.
+		||
+		&
+		&&
+		;
+			Semicolons (;) can be used to make lines of code denser it is signifies a new line of code to the interpreter
+		;;
+		( )
+		|
+		|&
+		<newline>
+	Metacharacters 
+		- A character that, when unquoted, separates words.
+		|
+		&
+		;
+		( )
+			- IS THIS ▼ VALID?
+			Allow the user to execute the enclosed code in a sub shell
+			This sub shell acts similar to a function in python and will keep any variable assignments or redirection isolated
+		< >
+		space
+		tab
+	
+	Where do I put this?? ▼ 
+		Parenthesis with a leading dollar sign $()
+			This is a 'command substitution'
+			Executes the nested command in a sub shell
+			Useful for getting the output of a command and substituting it
+				ex: VAR=$(Command arg1 arg2)
+		Double brackets [[]]
+			These surround conditional expressions
+			There MUST be spaces between every element '[[ -e $file ]]' is good but '[[-e$file]]' is bad
+			Some logic operators
+				https://www.gnu.org/software/bash/manual/bash.html#Bash-Conditional-Expressions
+				Is equal to
+					[[ $var1 == $var2 ]]
+				Is not equal to
+					[[ $var1 != $var2 ]]
+				sort 
+					[[ $var1 > $var2 ]] true if var1 sorts before var2 lexicographically (the way a dictionary is sorted use an ascii table)
+		Single brackets []
+			A legacy way to use conditional expressions
+			This syntax can be used but may be funky
+			Best only for use when a script is to be used by multiple different shells
+
+
+Portability
+	Use [] and = for conditional expressions (replaces [[]] and == respectively)
+	What are the main differences between shells?
+
+
+Exit status of a command
+	Every time a command is run an exit status is outputted
+	This status is stored in  $? For the last command executed
+	If the command is successful then exit status of 0 is assigned if there is a failure any number between 1 and 255 can be assigned
+	Extremely useful for error handling and debugging
+
+
+Passing an argument to a script (flags)
+	example: 
+		script:
+			echo -e "Function name: $0\nArg 1: $1\nArg 2: $2\nTotal args: $#"
+		user input: 
+			./TestRange -a balloon
+		output:
+			Function name: ./TestRange
+			Arg 1: -a
+			Arg 2: balloon
+			Total args: 2
