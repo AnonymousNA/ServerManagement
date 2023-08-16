@@ -53,13 +53,25 @@ while getopts ":hrvuips" opt; do
 		u)
 			CUSTOMUSER=true
 			echo -n "Enter username: " read USER
-			# Include input validation    
+			# Include input validation
+			# Rules:
+			#	- Must be one string no white spaces
+			#	- 32 char max leagnth
+			#	- No capital letters
+			#	- No periods
+			#	- Don't end in a dash
+			#	- No colons
                         # Include error handling
 			;;
 		i)
 			CUSTOMIP=true
 			echo -n "Enter IPv4: " read IP
 			# Include input validation
+			# Rules:
+			#	In IPv4 mode:
+			#		- [0-255].[0-255].[0-255].[0-255]
+			#		- Limit each section to a max number of "255".
+			#		- Allow siplification so 000.000.000.000 can be entered as 0.0.0.0
 			# Include error handling
 			;;
 		p)
@@ -80,9 +92,11 @@ while getopts ":hrvuips" opt; do
 			;;
 		*)
 			echo "Unkown option: $OPTARG"
-			echo ""	# Padding to make the help line stand out
+			# Padding to make the help line stand out
+			echo ""
 			echo "To display command help use -h flag"
 			echo ""
+			EXECUTE=false
 			;;
 	esac
 done
