@@ -1,46 +1,92 @@
 #!/bin/bash
-# This initiates a remote connection to my home server.
-# 'hetzner-ssh' isn't super portable so if needed replace - with _
+# A script that allows profiles to be loaded for faster and secure remote management with ssh
+# 'server-ssh' isn't super portable so if needed replace - with _
 
 # Possible users:
-#       user
-#       root
+#	user
+#	root
 
 # possible future options:
-#       Combine hirosgarage-ssh into this script
-#       Allow a custom IP to be typed
-#               Allow options for IPV4 and V6
-#       Allow a custom user to be entered
+#	Allow options for IPv4 and v6
+#       SFTP mode
 
 # Default settings
 USER=user
-IP=xxx.xxx.xxx.xx
+IP=xxx.xxx.xxx.xxx
 EXECUTE=true
+CUSTOMIP=false
+CUSTOMUSER=false
+MODE=ssh
 
-while getopts ":hrv" opt; do
-        case $opt in
-                h)
-                        echo "usage: hetzner-ssh [-h help] [-r root] [-v verbose]"
-                        echo "       -h      Displays this help message"
-                        echo "       -r      Logs in with root user instead of default user"
-                        echo "       -v      Enables verbose outputs"
-                        echo "default: $USER@$IP"
-                        echo "purpose: Establishes a ssh connection with the deafualt user or root if specified"
-                        EXECUTE=false
-                        ;;
-                r)
-                        USER=root
-                        ;;
-                v)
-                        VERBOSE=true
-                        ;;
-                *)
-                        echo "Unkown option: $OPTARG"
-                        echo "        To display help page use -h flag"
-                        ;;
-        esac
+# Loaded Server profiles
+HOSTNAME1="hostname"
+IP1=xxx.xxx.xxx.xxx
+USER1="user"
+
+HOSTNAME2="hostname"
+IP2=xxx.xxx.xxx.xxx
+USER2="user"
+
+HOSTNAME3="hostname"
+IP3=xxx.xxx.xxx.xxx
+USER3="user"
+
+while getopts ":hrvuips" opt; do
+	case $opt in
+		h)
+			echo "usage: hetzner-ssh [-h help] [-r root] [-v verbose]"
+			echo "       -h      Displays this help message"
+			echo "       -r      Logs in with root user instead of default user"
+			echo "       -v      Enables verbose outputs"
+			echo "       -u      custom user can be entered."
+			echo "       -i      custom IP can be entered."
+			echo "default: $USER@$IP"
+			echo "purpose: Establishes a ssh connection with a remote server. Can also load saved profiles."
+			EXECUTE=false
+			;;
+		r)
+			USER=root
+			;;	
+		v)
+			VERBOSE=true	# Currently doesn't actually do anything (find out if this option needs to be here) (could just print the profile being used before the ssh command executes)
+			;;
+		u)
+			CUSTOMUSER=true
+			echo -n "Enter username: " read USER
+			# Include input validation    
+                        # Include error handling
+			;;
+		i)
+			CUSTOMIP=true
+			echo -n "Enter IPv4: " read IP
+			# Include input validation
+			# Include error handling
+			;;
+		p)
+			# Loads saved profiles
+			# These profiles should be moved to an external file but for now they will be hard coded
+			# Include input validation
+                        # Include error handling
+			;;
+		s)
+			# Will save the user and IP entered
+			# Needs a bit of logic so that the new profile will keep the properties of the one loaded
+			#	if all field aren't filled out (hostname, IPv4 or IPv6, user)
+			# Include input validation
+                        # Include error handling
+			;;
+		l)
+			# List all saved profiles
+			;;
+		*)
+			echo "Unkown option: $OPTARG"
+			echo ""	# Padding to make the help line stand out
+			echo "To display command help use -h flag"
+			echo ""
+			;;
+	esac
 done
-             
+
 if [ "$EXECUTE" = "true" ]; then
-        ssh $USER@$IP
+	ssh $USER@$IP
 fi
