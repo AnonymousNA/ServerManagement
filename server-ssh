@@ -2,23 +2,35 @@
 # A script that allows profiles to be loaded for faster and secure remote management with ssh
 # 'server-ssh' isn't super portable so if needed replace - with _
 
-# Possible users:
-#	user
-#	root
-
-# possible future options:
+# Project steps:
+#	Custom user
+#		Input validation (current)
+#		Error handling
+#	Custom IPv4 only for now
+#		Input validation
+#		Error handling
+#	List profiles
+#	Load profiles
+#		Basic Functionality
+#		Input validation
+#		Error handling
+#	Save profiles
+#		Basic Functionality
+#		Only allow IPv4 adress
+#		Input validation
+#		Error handling
 #	Allow options for IPv4 and v6
+#		Core ssh command where the default profile contains a IPv6 address
+#		Enable custom IPv6 entering
 #       SFTP mode
 
 # Default settings
 USER=user
 IP=xxx.xxx.xxx.xxx
 EXECUTE=true
-CUSTOMIP=false
-CUSTOMUSER=false
-MODE=ssh
+#MODE=ssh
 
-# Loaded Server profiles
+# Loaded server profiles
 HOSTNAME1="hostname"
 IP1=xxx.xxx.xxx.xxx
 USER1="user"
@@ -31,15 +43,19 @@ HOSTNAME3="hostname"
 IP3=xxx.xxx.xxx.xxx
 USER3="user"
 
-while getopts ":hrvuips" opt; do
+while getopts ":hrvuipsl" opt; do
 	case $opt in
 		h)
-			echo "usage: hetzner-ssh [-h help] [-r root] [-v verbose]"
+			echo "usage: server-ssh [-h] [-r] [-v] [-u user] [-i IP] [-p profile]
+                  [-s hostname user IP] [-l]"
 			echo "       -h      Displays this help message"
 			echo "       -r      Logs in with root user instead of default user"
 			echo "       -v      Enables verbose outputs"
-			echo "       -u      custom user can be entered."
-			echo "       -i      custom IP can be entered."
+			echo "       -u      Custom user can be entered."
+			#echo "       -i      Custom IP can be entered."
+			#echo "       -p      Loads saved profiles"
+			#echo "       -s	     Creates and saves a new server profile"
+			#echo "       -l      List all saved profiles"
 			echo "default: $USER@$IP"
 			echo "purpose: Establishes a ssh connection with a remote server. Can also load saved profiles."
 			EXECUTE=false
@@ -51,7 +67,6 @@ while getopts ":hrvuips" opt; do
 			VERBOSE=true	# Currently doesn't actually do anything (find out if this option needs to be here) (could just print the profile being used before the ssh command executes)
 			;;
 		u)
-			CUSTOMUSER=true
 			echo -n "Enter username: " read USER
 			# Include input validation
 			# Rules:
@@ -64,14 +79,15 @@ while getopts ":hrvuips" opt; do
                         # Include error handling
 			;;
 		i)
-			CUSTOMIP=true
-			echo -n "Enter IPv4: " read IP
+			#echo -n "Enter IPv4: " read IP
 			# Include input validation
 			# Rules:
 			#	In IPv4 mode:
 			#		- [0-255].[0-255].[0-255].[0-255]
 			#		- Limit each section to a max number of "255".
 			#		- Allow siplification so 000.000.000.000 can be entered as 0.0.0.0
+			#	In IPv6 mode:
+			#		- 
 			# Include error handling
 			;;
 		p)
