@@ -1,0 +1,46 @@
+#!/bin/bash
+# This initiates a remote connection to my server.
+# 'server-ssh' isn't super portable so if needed replace - with _
+
+# Possible users:
+#       user1
+#       root
+
+# possible future options:
+#       Combine other-ssh into this script
+#       Allow a custom IP to be typed
+#               Allow options for IPV4 and V6
+#       Allow a custom user to be entered
+
+# Default settings
+USER=user
+IP=xxx.xxx.xxx.xx
+EXECUTE=true
+
+while getopts ":hrv" opt; do
+        case $opt in
+                h)
+                        echo "usage: hetzner-ssh [-h help] [-r root] [-v verbose]"
+                        echo "       -h      Displays this help message"
+                        echo "       -r      Logs in with root user instead of default user"
+                        echo "       -v      Enables verbose outputs"
+                        echo "default: user@xxx.xxx.xxx.xx"
+                        echo "purpose: Establishes a ssh connection with the deafualt user or root if specified"
+                        EXECUTE=false
+                        ;;
+                r)
+                        USER=root
+                        ;;
+                v)
+                        VERBOSE=true
+                        ;;
+                *)
+                        echo "Unkown option: $OPTARG"
+                        echo "        To display command help use -h flag"
+                        ;;
+        esac
+done
+
+if [$EXECUTE=true]; then
+        ssh $USER@$IP
+fi
