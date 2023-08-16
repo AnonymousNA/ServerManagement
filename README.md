@@ -12,4 +12,4 @@ Also this project is a way for me to learn how to use bash and git.
     I'm pretty sure, from the 0.5 ms that I looked at it, that this branch is for making scripts to import hard drive data from an external
     file and parse it to something usable for my dashboard.
   ## remote-management
-    This will allow for remote management with relitive ease.
+    This will allow for remote management with relative ease.
