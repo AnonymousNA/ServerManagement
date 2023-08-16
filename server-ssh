@@ -1,13 +1,13 @@
 #!/bin/bash
-# This initiates a remote connection to my server.
-# 'server-ssh' isn't super portable so if needed replace - with _
+# This initiates a remote connection to my home server.
+# 'hetzner-ssh' isn't super portable so if needed replace - with _
 
 # Possible users:
-#       user1
+#       user
 #       root
 
 # possible future options:
-#       Combine other-ssh into this script
+#       Combine hirosgarage-ssh into this script
 #       Allow a custom IP to be typed
 #               Allow options for IPV4 and V6
 #       Allow a custom user to be entered
@@ -24,7 +24,7 @@ while getopts ":hrv" opt; do
                         echo "       -h      Displays this help message"
                         echo "       -r      Logs in with root user instead of default user"
                         echo "       -v      Enables verbose outputs"
-                        echo "default: user@xxx.xxx.xxx.xx"
+                        echo "default: $USER@$IP"
                         echo "purpose: Establishes a ssh connection with the deafualt user or root if specified"
                         EXECUTE=false
                         ;;
@@ -40,7 +40,7 @@ while getopts ":hrv" opt; do
                         ;;
         esac
 done
-
-if [$EXECUTE=true]; then
+             
+if [ "$EXECUTE" = "true" ]; then
         ssh $USER@$IP
 fi
