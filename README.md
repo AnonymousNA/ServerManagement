@@ -7,7 +7,7 @@ Also this project is a way for me to learn how to use bash and git.
 
 ---
 # What da Branches Doin'?
-  ## Main
+  ## main
   The absolute BIGGEST pick me girl in the world! I don't blame her tho everyone loves Main.
   ## DataImporting
   Frankly I have no clue what this is...
