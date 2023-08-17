@@ -15,8 +15,8 @@ Data Types
 	
 	Arrays
 		- Understand me!!!
-		The [@] is used to index all the elements of an array.	IS THIS TRUE?
-		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate	IS THIS TRUE?
+		The [@] is used to index all the elements of an array.	IS THIS ACCURATE?
+		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate	IS THIS ACCURATE?
 
 
 Maths
@@ -45,24 +45,24 @@ Variables
 		ex: $PWD or $things_i_love
 	- When calling a variable the {} are used to isolate the variable to ensure correct syntax.
 		EX: echo "${Hello}World" vs echo -n "$Hello"; echo "World" because echo "$HelloWorld" returns something different
-	The [@] is used to index all the elements of a variable. IS THIS TRUE?
+	The [@] is used to index all the elements of a variable. IS THIS ACCURATE?
 
 
 Functions
-	"done" closes all loops in bash IS THIS TRUE?
+	"done" closes all loops in bash IS THIS ACCURATE?
 	case
 		- How the fuck does it work??
 		) end of a pattern that case is trying to match
 		;; acts as a control operator and ends that specific chunk of code that is executed only when the pattern is met
 	
 	if
-		Comprised of CONDITION and STUFF commands	IS THIS TRUE?
-		When CONDITION is executed it leaves behind a exit status	IS THIS TRUE?
-		If this exit status is 0 then the CONDITION evaluated to true and if not it's false	IS THIS TRUE?
-		STUFF is only executed if CONDITION exits with a status of 0	IS THIS TRUE?
-			ex: if CONDITION	IS THIS TRUE?
-			    do STUFF		IS THIS TRUE?
-			    fi			IS THIS TRUE?
+		Comprised of CONDITION and STUFF commands	IS THIS ACCURATE?
+		When CONDITION is executed it leaves behind a exit status	IS THIS ACCURATE?
+		If this exit status is 0 then the CONDITION evaluated to true and if not it's false	IS THIS ACCURATE?
+		STUFF is only executed if CONDITION exits with a status of 0	IS THIS ACCURATE?
+			ex: if CONDITION	IS THIS ACCURATE?
+			    do STUFF		IS THIS ACCURATE?
+			    fi			IS THIS ACCURATE?
 	
 	when
 		- understand me!
@@ -72,7 +72,7 @@ Functions
 		- understand me!
 
 
-Passing arguments to a function		IS THIS TRUE?
+Passing arguments to a function		IS THIS ACCURATE?
 	- Update with the while and case rombo combo
 	When a function is called special sheet variables are used to assign what arguments have been passed
 	These variables are $0 through $9
@@ -133,19 +133,19 @@ Syntax
 			Best only for use when a script is to be used by multiple different shells
 
 
-Portability	IS THIS TRUE?
-	Use [] and = for conditional expressions (replaces [[]] and == respectively)
-	What are the main differences between shells?
+Portability	IS THIS ACCURATE?
+	Use [] and = for conditional expressions (replaces [[]] and == respectively)	IS THIS ACCURATE?
+	What are the main differences between shells?	IS THIS ACCURATE?
 
 
-Exit status of a command	IS THIS TRUE?
-	Every time a command is run an exit status is outputted
-	This status is stored in  $? For the last command executed
-	If the command is successful then exit status of 0 is assigned if there is a failure any number between 1 and 255 can be assigned
-	Extremely useful for error handling and debugging
+Exit status of a command	IS THIS ACCURATE?
+	Every time a command is run an exit status is outputted		IS THIS ACCURATE?
+	This status is stored in  $? For the last command executed	IS THIS ACCURATE?
+	If the command is successful then exit status of 0 is assigned if there is a failure any number between 1 and 255 can be assigned	IS THIS ACCURATE?
+	Extremely useful for error handling and debugging	IS THIS ACCURATE?
 
 
-Passing an argument to a script (flags)	IS THIS TRUE?
+Passing an argument to a script (flags)	IS THIS ACCURATE?
 	example: 
 		script:
 			echo -e "Function name: $0\nArg 1: $1\nArg 2: $2\nTotal args: $#"
