@@ -28,6 +28,7 @@ port=port_1
 key_authentication=key_authentication1
 execute="true"	# Determines if a connectiopn will be attempted (used mostly for error handling)
 mode="ssh"	# The sucure connection being attempted
+ip_mode="IPv4"
 verbose="false"
 
 while getopts ":hrvuipsl" opt; do
@@ -55,29 +56,9 @@ while getopts ":hrvuipsl" opt; do
 			;;
 		u)
 			echo -n "Enter username: " read user
-			# Include input validation
-			# Rules:
-			#	- Must be one string no white spaces
-			#	- 32 char max leagnth	${#user} this will return the length of the varable user
-			#	- No capital letters
-			#	- No periods
-			#	- Don't end in a dash
-			#	- No colons
-                        # Include error handling
-			#	Make a single function and just have it call when an error state has occored
 			;;
 		i)
-			#echo -n "Enter IPv4: " read ip
-			# Include input validation
-			# Rules:
-			#	In IPv4 mode:
-			#		- [0-255].[0-255].[0-255].[0-255]
-			#		- Limit each section to a max number of "255".
-			#		- Allow siplification so 000.000.000.000 can be entered as 0.0.0.0
-			#	In IPv6 mode:
-			#		- 
-			# Include error handling
-			#	Make a single function and just have it call when an error state has occored
+			echo -n "Enter IPv4 address: " read ip
 			;;
 		p)
 			# Loads saved profiles
