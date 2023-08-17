@@ -2,36 +2,6 @@
 # A script that allows profiles to be loaded for faster and secure remote management
 # 'server-ssh' isn't super portable so if needed replace - with _
 
-# Project steps:
-#	Allow key auth
-#		Just passes the -i <priv_key_path> to the core command (current)
-#	Custom user
-#		Input validation 
-#		Error handling
-#	Custom IPv4 only for now
-#		Input validation
-#		Error handling
-#	List profiles
-#	Load profiles
-#		Basic Functionality
-#		Input validation
-#		Error handling
-#	Save profiles
-#		Basic Functionality
-#		Only allow IPv4 adress
-#		Input validation
-#		Error handling
-#	Allow options for IPv4 and v6
-#		Core ssh command where the default profile contains a IPv6 address
-#		Enable custom IPv6 entering
-#	Allow custom port
-#		Basic Functionality
-#		Input validation
-#		Error handling
-#       SFTP mode
-#	SCP mode
-#	key based auth setup mode
-
 # Saved server profiles
 hostname_1="hostname"
 user_1="user"
