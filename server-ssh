@@ -7,43 +7,48 @@ hostname_1="hostname"
 user_1="user"
 ip_1="xxx.xxx.xxx.xxx"
 port_1="22"
-key_authentication1="true"
+key_auth_1="true"
 
 hostname_2="hostname"
 user_2="user"
 ip_2="xxx.xxx.xxx.xxx"
 port_2="22"
-key_authentication2="true"
+key_auth_2="true"
 
 hostname_3="hostname"
 user_3="user"
 ip_3="xxx.xxx.xxx.xxx"
 port_3="22"
-key_authentication3="true"
+key_auth_3="true"
 
 # Default settings
+hostname=hostname_1
 user=user_1
 ip=ip_1
 port=port_1
-key_authentication=key_authentication1
+key_auth=key_auth_1
 execute="true"	# Determines if a connectiopn will be attempted (used mostly for error handling)
 mode="ssh"	# The sucure connection being attempted
 ip_mode="IPv4"
 verbose="false"
 
-while getopts ":hrvuipsl" opt; do
+while getopts ":hrvklpsui" opt; do
 	case $opt in
 		h)
 			echo "usage: server-ssh [-h] [-r] [-v] [-u user] [-i IP] [-p profile]
-                  [-s hostname user IP] [-l]"
-			echo "       -h      Displays this help message"
-			echo "       -r      Logs in with root user instead of default user"
-			echo "       -v      Enables verbose outputs"
-			echo "       -u      Custom user can be entered."
-			#echo "       -i      Custom IP can be entered."
+                  [-s hostname user IP] [-l] [-k privkeypath]
+		  [-port portnum] [-version]"
+			echo "       -h		Displays this help message"
+			echo "	     -version 
+			echo "       -r		Logs in with root user instead of default user"
+			echo "       -v		Enables verbose outputs"
+			echo "	     -k		Uses key based authentication"
+			#echo "       -l	 List all saved profiles"
 			#echo "       -p      Loads saved profiles"
-			#echo "       -s	     Creates and saves a new server profile"
-			#echo "       -l      List all saved profiles"
+			#echo "       -s      Saves a new server profile"
+			#echo "       -u      Custom user can be entered"
+			#echo "       -i      Custom IP can be entered"
+			#echo "       -port   Custom port can be entered"
 			echo "default: $user@$ip"
 			echo "purpose: Establishes a ssh connection with a remote server. Can also load saved profiles."
 			execute=false
@@ -52,34 +57,18 @@ while getopts ":hrvuipsl" opt; do
 			user=root
 			;;	
 		v)
-			verbose=true	# Currently doesn't actually do anything (find out if this option needs to be here) (could just print the profile being used before the ssh command executes)
-			;;
-		u)
-			echo -n "Enter username: " read user
+			verbose="true"	# Currently doesn't actually do anything (could just print the profile being used before the ssh command executes)
+			echo "Hostname: $hostname"
+			echo "User: $user"
+			echo "IP: $ip"
+			echo "Port: $user"
+			echo "Key Authentication: $key_auth"
 			;;
 		i)
 			echo -n "Enter IPv4 address: " read ip
 			;;
-		p)
-			# Loads saved profiles
-			# These profiles should be moved to an external file but for now they will be hard coded
-			# Include input validation
-                        # Include error handling
-			#	Make a single function and just have it call when an error state has occored
-			;;
-		s)
-			# Will save the user and IP entered
-			# Needs a bit of logic so that the new profile will keep the properties of the one loaded
-			#	if all field aren't filled out (hostname, IPv4 or IPv6, user)
-			# Include input validation
-                        # Include error handling
-			#	Make a single function and just have it call when an error state has occored
-			;;
-		l)
-			# List all saved profiles
-			;;
 		*)
-			echo "Unkown option: $OPTARG"
+			echo "Unknown option: $OPTARG"
 			# Padding to make the help line stand out
 			echo ""
 			echo "To display command help use -h flag"
@@ -90,5 +79,8 @@ while getopts ":hrvuipsl" opt; do
 done
 
 if [ "$execute" = "true" ]; then
-	$mode $user@$ip
+	if [ "$verbose" = "true" ]; then
+		$mode -v $user@$ip
+	else
+		$mode $user@$ip
 fi
