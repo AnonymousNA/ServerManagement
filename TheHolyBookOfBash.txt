@@ -15,24 +15,32 @@ Data Types
 	
 	Arrays
 		- Understand me!!!
-		The [@] is used to index all the elements of an array.	IS THIS ACCURATE?
-		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate	IS THIS ACCURATE?
+		The [@] is used to index all the elements of an array.	IS THIS TRUE?
+		I believe the reason that the double quotes (") are required when calling the array in the for loop is because every time the array is indexed the quotation marks encapsulate	IS THIS TRUE?
 
 
-Maths
-	Math can only be done with raw integers not string integers
-	$((operations))
-		- Understand why the syntax works like that
-	+ addition
-	- subtraction
-	/ division
-		Returns the answer rounded down to the whole number
-		ex: $((5/3)); >>> 1
-	* multiplication
-	% divides then returns the remainder
-		ex: $((5%3)); >>> 2
-	Functions
-		Include some essential maths functions use link as a jumping point(https://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks)
+Operators:
+	Maths:
+		Math can only be done with raw integers not string integers
+		$((operations))
+			- Understand why the syntax works like that
+		+ addition
+		- subtraction
+		/ division
+			Returns the answer rounded down to the whole number
+				ex: $((5/3)); >>> 1
+		* multiplication
+		% divides then returns the remainder
+			ex: $((5%3)); >>> 2
+		Functions
+			Include some essential maths functions use link as a jumping point
+			(https://unix.stackexchange.com/questions/40786/how-to-do-integer-float-calculations-in-bash-or-other-languages-frameworks)
+
+	String manipulation:
+		- UNDERSTAND ME
+
+	Comparisons:
+		- UNDERSTAND ME
 
 
 Variables
@@ -40,39 +48,170 @@ Variables
 		ex: things_i_love="cats"
 	- ONLY global and shell variables should be all uppercase
 		ex: PWD vs things_i_love
-	- Local variables should be lower case
+	- Local variables should be lowercase
 	- To call a variable use a single '$'
 		ex: $PWD or $things_i_love
 	- When calling a variable the {} are used to isolate the variable to ensure correct syntax.
 		EX: echo "${Hello}World" vs echo -n "$Hello"; echo "World" because echo "$HelloWorld" returns something different
-	The [@] is used to index all the elements of a variable. IS THIS ACCURATE?
+	The [@] is used to index all the elements of a variable. IS THIS TRUE?
 
 
-Functions
-	"done" closes all loops in bash IS THIS ACCURATE?
+Conditional Constructs:
+	- A feature of a language that allows customized inputs and outputs. Statements are a form of high
+	  level logic operations (like an if statement).
+	
 	case
-		- How the fuck does it work??
-		) end of a pattern that case is trying to match
-		;; acts as a control operator and ends that specific chunk of code that is executed only when the pattern is met
-	
+		- Case is not a function it's a statement
+		- In a way case acts as a set of nested if statements
+		ex: 
+			case $variable in
+				pattern)
+					echo "pattern"
+					;;
+			esac
+		broken down:
+			case $variable in
+				- Initiates the case statement
+				- The value of $variable will be checked against all the below value
+				- The 'in' keyword encapsulates the variable being matched and is followed
+				  by the patterns being matched
+			pattern)
+				- This is the first pattern being matched
+				- Case automatically treats the $variable and pattern) as strings
+				- So if $variable=pattern then the code below pattern) will execute
+				- If not nothing will happen and the statement tries the other patterns
+				- The close parentheses ')' indicates the end of the pattern
+			echo "pattern" ;;
+				- This is the code that is executed if $variable matches pattern
+				- This section is highly customizable
+				- The double semicolon is a control operator
+					- This specific control operator ';;' ends the case statement and
+					  stops trying to match $variable to other patterns
+					- If there is another pattern that will match $variable it will
+					  never execute
+						ex: 
+							case $variable in
+								pattern)
+									echo "pattern 1"
+									;;
+								pattern)
+									echo "pattern 2"
+									;;
+							esac
+			esac
+				- This keyword signals the complete end of the case statement
+				- Nothing super special just case backwards
+
 	if
-		Comprised of CONDITION and STUFF commands	IS THIS ACCURATE?
-		When CONDITION is executed it leaves behind a exit status	IS THIS ACCURATE?
-		If this exit status is 0 then the CONDITION evaluated to true and if not it's false	IS THIS ACCURATE?
-		STUFF is only executed if CONDITION exits with a status of 0	IS THIS ACCURATE?
-			ex: if CONDITION	IS THIS ACCURATE?
-			    do STUFF		IS THIS ACCURATE?
-			    fi			IS THIS ACCURATE?
-	
-	when
+		Comprised of CONDITION and STUFF commands	IS THIS TRUE?
+		When CONDITION is executed it leaves behind an exit status	IS THIS TRUE?
+		If this exit status is 0 then the CONDITION evaluated to true and if not it's false	IS THIS TRUE?
+		STUFF is only executed if CONDITION exits with a status of 0	IS THIS TRUE?
+			ex: if CONDITION	IS THIS TRUE?
+			    do STUFF		IS THIS TRUE?
+			    fi			IS THIS TRUE?
+
+	select
+	    - understand me!
+
+    ((…))
 		- understand me!
+
+    [[…]]
+		- understand me!
+
+
+Looping constructs:
+	- Notes
+
+	while <condition>; do; <code>; done
+	    ex: while getopts ":hrvklpsui" opt
+	    Loops as long as the <condition> (getopts ":hrvklpsui" opt) is true
+	    To signify the end of the loop use 'done'.
+
 	for
 		- understand me!
+
+    until
+        - understand me!
+
+
+Bourne Shell Built-in Commands:
+	- notes
+
 	exit
 		- understand me!
 
+    :
+    	- understand me!
 
-Passing arguments to a function		IS THIS ACCURATE?
+    .
+    	- understand me!
+
+    break
+    	- understand me!
+
+    cd
+    	- understand me!
+
+    continue
+    	- understand me!
+
+    eval
+    	- understand me!
+
+    exec
+    	- understand me!
+
+    export
+    	- understand me!
+
+    getopts <optsting> <name> [arg1 arg2 argX]
+    	Use by a script to parse positional parameters
+        Each time getopts is called the next argument from the execution of the script is accessed and assigned to <name>
+        <optstring> contains the option characters to be recognized; if a character is followed by a colon, the option is expected to have an argument, which should be separated from it by whitespace
+        The colon (‘:’) and question mark (‘?’) may not be used as option characters
+        The index of the last argument accessed is stored in $OPTIND
+        $OPTIND is only reset or initialized to 1 every time a script is executed
+        By default processes args passed on script execution but can process supplied arguments [arg 1 arg2 argX]
+        If the first character of <optstring> is a colon, silent error reporting is used
+        In normal operation, diagnostic messages are printed when invalid options or missing option arguments are encountered
+    	ex: getopts ":hrvklpsui" opt
+    	    Reads the first argument (arg1) passed when the script was executed
+    	        This is the first time the get ops is called, so it initializes tbe $OPTIND and sets it to 1
+    	    Runs in silent mode because <optstring> starts with a ':'
+    	    Checks the value of arg1 against h, r, v, k, l, p, s, u, or i
+    	    The value of arg1 is assigned to $opt
+    	    TODO: Understand how the returned logic works. Why does it work in a while loop? I can pass a non-valid arg but all the valid args will be processed before the loop ends
+
+
+
+    hash
+    	- understand me!
+
+    pwd
+    	- understand me!
+
+    readonly
+    	- understand me!
+
+    return
+    	- understand me!
+
+    shift
+    	- understand me!
+
+    test
+    	- understand me!
+
+    umask
+    	- understand me!
+
+    unset
+    	- understand me!
+
+
+Passing arguments to a function		IS THIS TRUE?
 	- Update with the while and case rombo combo
 	When a function is called special sheet variables are used to assign what arguments have been passed
 	These variables are $0 through $9
@@ -104,8 +243,8 @@ Syntax
 		;
 		( )
 			- IS THIS ▼ VALID?
-			Allow the user to execute the enclosed code in a sub shell
-			This sub shell acts similar to a function in python and will keep any variable assignments or redirection isolated
+			Allow the user to execute the enclosed code in a subshell
+			This subshell acts similar to a function in python and will keep any variable assignments or redirection isolated
 		< >
 		space
 		tab
@@ -113,7 +252,7 @@ Syntax
 	Where do I put these?? ▼ 
 		Parenthesis with a leading dollar sign $()
 			This is a 'command substitution'
-			Executes the nested command in a sub shell
+			Executes the nested command in a subshell
 			Useful for getting the output of a command and substituting it
 				ex: VAR=$(Command arg1 arg2)
 		Double brackets [[]]
@@ -133,19 +272,19 @@ Syntax
 			Best only for use when a script is to be used by multiple different shells
 
 
-Portability	IS THIS ACCURATE?
-	Use [] and = for conditional expressions (replaces [[]] and == respectively)	IS THIS ACCURATE?
-	What are the main differences between shells?	IS THIS ACCURATE?
+Portability	IS THIS TRUE?
+	Use [] and = for conditional expressions (replaces [[]] and == respectively)
+	What are the main differences between shells?
 
 
-Exit status of a command	IS THIS ACCURATE?
-	Every time a command is run an exit status is outputted		IS THIS ACCURATE?
-	This status is stored in  $? For the last command executed	IS THIS ACCURATE?
-	If the command is successful then exit status of 0 is assigned if there is a failure any number between 1 and 255 can be assigned	IS THIS ACCURATE?
-	Extremely useful for error handling and debugging	IS THIS ACCURATE?
+Exit status of a command	IS THIS TRUE?
+	Every time a command is run an exit status is outputted
+	This status is stored in  $? For the last command executed
+	If the command is successful then exit status of 0 is assigned if there is a failure any number between 1 and 255 can be assigned
+	Extremely useful for error handling and debugging
 
 
-Passing an argument to a script (flags)	IS THIS ACCURATE?
+Passing an argument to a script (flags)	IS THIS TRUE?
 	example: 
 		script:
 			echo -e "Function name: $0\nArg 1: $1\nArg 2: $2\nTotal args: $#"

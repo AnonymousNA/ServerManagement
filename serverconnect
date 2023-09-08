@@ -1,0 +1,105 @@
+#!/bin/bash
+# A script that allows profiles to be loaded for faster and secure remote management
+
+# Saved profiles
+hostname_1="hostname"
+user_1="user"
+ip_1="xxx.xxx.xxx.xxx"
+port_1="22"
+key_auth_1="true"
+
+#hostname_2="hostname"
+#user_2="user"
+#ip_2="xxx.xxx.xxx.xxx"
+#port_2="22"
+#key_auth_2="true"
+#
+#hostname_3="hostname"
+#user_3="user"
+#ip_3="xxx.xxx.xxx.xxx"
+#port_3="22"
+#key_auth_3="true"
+
+# Default settings
+version='0.1.0'
+hostname=$hostname_1
+user=$user_1
+ip=$ip_1
+port=$port_1
+key_auth=$key_auth_1
+execute="true"	# Determines if a connection will be attempted (used mostly for error handling)
+mode="ssh"	# The secure connection being attempted
+ip_mode="IPv4"
+verbose="false"
+
+
+while [ "${OPTIND}" -le "${#}" ]; do
+  opt="${!OPTIND}" # Prints the current string being processed
+  case ${opt} in  # Matches the positional params to the effect they need to do
+		"-h") # stops the rest of the params from being parsed and just print the help page
+			echo "usage: server-ssh [-u user] [-i IP] [-p profile] [-s hostname user IP] [-k private_key_path] [-port port_number]"
+#			Move all these lines to a manual page
+			echo "       -h         Displays this help message"
+			echo "       -r         Logs in with root user instead of default user"
+			echo "       -v         Enables verbose outputs"
+#			echo "       -k         Uses key based authentication"
+#			echo "       -l         List all saved profiles"
+#			echo "       -p         Loads saved profiles"
+#			echo "       -s         Saves a new server profile"
+#			echo "       -u         Custom user can be entered"
+#			echo "       -i         Custom IP can be entered"
+			echo "       -version   Displays the script version"
+#			echo "       -port      Custom port can be entered"
+
+#			echo "default: ${user}@${ip}"
+#			echo "purpose: Establishes a ssh connection with a remote server. Can also load saved profiles."
+			execute="false"
+			break
+			;;
+		"-r") # Changes $user to "root"
+			user="root"
+			;;
+		"-v") # Runs in low level verbose mode
+			verbose="true"
+			;;
+#		"-i")
+#			echo -n "Enter IPv4 address: " read ip
+#			;;
+		"-version" | "--version") # Prints the version of the script and doesn't execute the connection
+		  echo ${version}
+		  execute="false"
+		  ;;
+		*)  # Catches all invalid parameters and displays them to the user with a tool tip on how to get to the help page
+			invalid_params+=("${opt}")
+			if [ "${opt}" == "${!#}" ]; then
+			  echo -n "Invalid option(s):"
+			  for i in "${invalid_params[@]}"; do
+			    echo -n " ${i}"
+			  done
+        echo $'\n\nTo display help page use -h flag\n'
+			fi
+			execute="false"
+			;;
+	esac
+  ((OPTIND++))
+done
+
+if [ "$execute" = "true" ]; then
+  if [ "${verbose}" == "true" ]; then
+      echo "Mode: ${mode}"
+      echo "Hostname: ${hostname}"
+      echo "User: ${user}"
+      echo "IP: ${ip}"
+      echo "Port: ${port}"
+      echo "Key Authentication: ${key_auth}"
+      echo "Protocol: ${ip_mode}"
+  fi
+
+	if [ "$verbose" = "true" ]; then
+#		echo "${mode} -v ${user}@${ip}" # For debugging
+    ${mode} -v ${user}@${ip}
+	else
+#		echo "${mode} ${user}@${ip}" # For debugging
+    ${mode} ${user}@${ip}
+  fi
+fi
