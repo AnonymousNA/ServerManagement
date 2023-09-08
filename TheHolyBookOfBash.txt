@@ -182,7 +182,7 @@ Bourne Shell Built-in Commands:
     	    Runs in silent mode because <optstring> starts with a ':'
     	    Checks the value of arg1 against h, r, v, k, l, p, s, u, or i
     	    The value of arg1 is assigned to $opt
-
+    	    TODO: Understand how the returned logic works. Why does it work in a while loop? I can pass a non-valid arg but all the valid args will be processed before the loop ends
 
 
 
