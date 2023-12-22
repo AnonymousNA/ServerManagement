@@ -84,7 +84,7 @@ while [ "${OPTIND}" -le "${#}" ]; do
   ((OPTIND++))
 done
 
-if [ "$execute" = "true" ]; then
+if [ "$execute" == "true" ]; then
   if [ "${verbose}" == "true" ]; then
       echo "Mode: ${mode}"
       echo "Hostname: ${hostname}"
