@@ -1,0 +1,23 @@
+# !bin/bash
+
+files=$( ls -a "${1}" )
+filetype1="tif"
+filetype2="jpeg"
+count=0
+destdirectory="${2}"
+
+for file in $files 
+do
+
+	if [[ "${file}" == *".${filetype1}" ]]; then
+		convert "${1}/${file}" "${1}/${count}.${filetype2}"
+		mv "${1}/${file}" "${destdirectory}"
+	fi
+
+	if [[ "${file}" != *".${filetype1}" ]]; then
+		echo "${1}/${file} is not a ${filetype1}"
+	fi
+
+	#echo $count
+	let "count++"
+done
