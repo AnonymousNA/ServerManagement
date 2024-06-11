@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#echo "
+# .5 # Waits 0.5 second.
+# 5  # Waits 5 seconds.
+# 5s # Waits 5 seconds.
+# 5m # Waits 5 minutes.
+# 5h # Waits 5 hours.
+# 5d # Waits 5 days."
+
+TIMER=$(($1*60))
+# Default intake is min and outputs seconds
+
+echo "$TIMER Sec(s) aka $1 Min(s)"
+sleep $TIMER
+blueutil -p 0
+
+#https://github.com/toy/blueutil
+#https://stackoverflow.com/questions/25988904/turn-on-and-off-the-bluetooth-connection-on-mac
